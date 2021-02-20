@@ -32,6 +32,7 @@ class SplashActivity : BaseActivity<MainViewModel, ActivitySplashBinding>(
         }
     }
 
+    @Suppress("DEPRECATION")
     private fun hideSystemUI() {
         // Enables regular immersive mode.
         // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.

@@ -116,5 +116,6 @@ dependencies {
     testImplementation("org.mockito:mockito-core:$${Versions.mockito}")
     testImplementation("org.mockito:mockito-inline:${Versions.mockito}")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
+    androidTestImplementation("com.kaspersky.android-components:kaspresso:1.2.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 }
