@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Movie Jetpack</string>
+    <string name="msg_app_logo_image">App logo Image</string>
+</resources>
