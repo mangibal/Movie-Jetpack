@@ -1,6 +1,6 @@
-package com.iqbalfauzi.moviejetpack.presentation.home.module
+package com.iqbalfauzi.moviejetpack.presentation.main.module
 
-import com.iqbalfauzi.moviejetpack.presentation.home.viewmodel.MainViewModel
+import com.iqbalfauzi.moviejetpack.presentation.main.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

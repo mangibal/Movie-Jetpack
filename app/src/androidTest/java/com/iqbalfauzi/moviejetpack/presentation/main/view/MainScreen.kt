@@ -1,4 +1,4 @@
-package com.iqbalfauzi.moviejetpack.presentation.home.view
+package com.iqbalfauzi.moviejetpack.presentation.main.view
 
 import com.agoda.kakao.text.KTextView
 import com.iqbalfauzi.moviejetpack.R

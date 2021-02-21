@@ -2,4 +2,6 @@
 <resources>
     <dimen name="dimen24">24dp</dimen>
     <dimen name="font36">36sp</dimen>
+    <dimen name="dimen2">2dp</dimen>
+    <dimen name="dimen12">12dp</dimen>
 </resources>

@@ -1,6 +1,9 @@
 package com.iqbalfauzi.moviejetpack.koin
 
-import com.iqbalfauzi.moviejetpack.presentation.home.module.mainModule
+import com.iqbalfauzi.moviejetpack.data.repository.remote.module.networkModule
+import com.iqbalfauzi.moviejetpack.data.repository.repositoryModule
+import com.iqbalfauzi.moviejetpack.presentation.home.homeModule
+import com.iqbalfauzi.moviejetpack.presentation.main.module.mainModule
 import org.koin.core.module.Module
 
 /**
@@ -8,5 +11,14 @@ import org.koin.core.module.Module
  * iqbal.fauzi.if99@gmail.com
  */
 val appComponent: List<Module> = listOf(
-    mainModule
+    /**
+     * Data Module
+     * */
+    networkModule,
+    repositoryModule,
+    /**
+     * Presentation Module
+     * */
+    mainModule,
+    homeModule
 )

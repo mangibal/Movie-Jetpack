@@ -1,11 +1,10 @@
-package com.iqbalfauzi.moviejetpack.presentation.home.view
+package com.iqbalfauzi.moviejetpack.presentation.main.view
 
 import androidx.test.core.app.ActivityScenario
 import com.iqbalfauzi.moviejetpack.R
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Before
 
-import org.junit.Assert.*
 import org.junit.Test
 
 /**

@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Movie Jetpack</string>
     <string name="msg_app_logo_image">App logo Image</string>
+    <string name="msg_press_again_to_exit">Press again to exit</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="msg_image_movie_banner">Image Movie Banner</string>
 </resources>

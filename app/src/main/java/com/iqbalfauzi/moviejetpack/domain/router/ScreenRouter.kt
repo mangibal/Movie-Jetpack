@@ -11,59 +11,54 @@ import androidx.appcompat.app.AppCompatActivity
  * Created by Iqbal Fauzi on 20/02/21 18.13
  * iqbal.fauzi.if99@gmail.com
  */
-object ScreenRouter {
-
-    fun Activity.goToActivityForResult(className: String, bundle: Bundle?, requestCode: Int) {
-        val i = Intent(this, Class.forName(className))
-        if (bundle != null) {
-            i.putExtras(bundle)
-        }
-        startActivityForResult(i, requestCode)
+fun Activity.goToActivityForResult(className: String, bundle: Bundle?, requestCode: Int) {
+    val i = Intent(this, Class.forName(className))
+    if (bundle != null) {
+        i.putExtras(bundle)
     }
+    startActivityForResult(i, requestCode)
+}
 
-    fun goToActivity(
-        context: AppCompatActivity,
-        targetPage: Class<*>,
-        bundle: Bundle? = null,
-        isFinish: Boolean = false
-    ) {
-        try {
-            with(context) {
-                val screen = Intent(this, targetPage)
-                bundle?.let {
-                    screen.putExtras(bundle)
-                }
-                startActivity(
-                    screen,
-                    ActivityOptions.makeSceneTransitionAnimation(this).toBundle()
-                )
-                if (isFinish) {
-                    finish()
-                }
+fun Activity.goToActivity(
+    targetPage: Class<*>,
+    bundle: Bundle? = null,
+    isFinish: Boolean = false
+) {
+    try {
+        with(this) {
+            val screen = Intent(this, targetPage)
+            bundle?.let {
+                screen.putExtras(bundle)
             }
-        } catch (e: ActivityNotFoundException) {
-            e.printStackTrace()
-        }
-    }
-
-    fun goToActivityClearStack(
-        context: AppCompatActivity,
-        targetPage: Class<*>,
-        bundle: Bundle? = null
-    ) {
-        try {
-            with(context) {
-                val screen = Intent(this, targetPage)
-                bundle?.let {
-                    screen.putExtras(bundle)
-                }
-                screen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                startActivity(screen, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
+            startActivity(
+                screen,
+                ActivityOptions.makeSceneTransitionAnimation(this).toBundle()
+            )
+            if (isFinish) {
                 finish()
             }
-        } catch (e: ActivityNotFoundException) {
-            e.printStackTrace()
         }
+    } catch (e: ActivityNotFoundException) {
+        e.printStackTrace()
     }
+}
 
+fun Activity.goToActivityClearStack(
+    targetPage: Class<*>,
+    bundle: Bundle? = null
+) {
+    try {
+        with(this) {
+            val screen = Intent(this, targetPage).also {
+                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            }
+            bundle?.let {
+                screen.putExtras(bundle)
+            }
+            startActivity(screen, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
+            finish()
+        }
+    } catch (e: ActivityNotFoundException) {
+        e.printStackTrace()
+    }
 }

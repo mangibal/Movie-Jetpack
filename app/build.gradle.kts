@@ -22,6 +22,12 @@ android {
         buildConfigField("String", "API_KEY", "\"${Properties.API_KEY}\"")
         buildConfigField("String", "BASE_URL", "\"${Properties.BASE_URL}\"")
         buildConfigField("String", "BASE_IMAGE_URL", "\"${Properties.BASE_IMAGE_URL}\"")
+
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments = mapOf()
+//            }
+//        }
     }
 
     buildTypes {
@@ -79,6 +85,7 @@ dependencies {
     implementation("io.coil-kt:coil:${Versions.coil}") // Image Loader
     implementation("androidx.viewpager2:viewpager2:${Versions.viewPager2}")
     implementation("de.hdodenhof:circleimageview:${Versions.circleImageView}")
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:${Versions.viewModel}")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.viewModel}")
@@ -88,6 +95,7 @@ dependencies {
     /* Room Persistence */
     implementation("androidx.room:room-runtime:${Versions.room}")
     implementation("androidx.room:room-ktx:${Versions.room}")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
     kapt("androidx.room:room-compiler:${Versions.room}")
     testImplementation("androidx.room:room-testing:${Versions.room}")
     // Logger

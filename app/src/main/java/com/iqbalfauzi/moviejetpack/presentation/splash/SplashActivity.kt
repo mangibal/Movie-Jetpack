@@ -5,9 +5,9 @@ import android.view.View
 import androidx.lifecycle.lifecycleScope
 import com.iqbalfauzi.moviejetpack.databinding.ActivitySplashBinding
 import com.iqbalfauzi.moviejetpack.domain.base.view.BaseActivity
-import com.iqbalfauzi.moviejetpack.domain.router.ScreenRouter
-import com.iqbalfauzi.moviejetpack.presentation.home.view.MainActivity
-import com.iqbalfauzi.moviejetpack.presentation.home.viewmodel.MainViewModel
+import com.iqbalfauzi.moviejetpack.domain.router.goToActivityClearStack
+import com.iqbalfauzi.moviejetpack.presentation.main.view.MainActivity
+import com.iqbalfauzi.moviejetpack.presentation.main.viewmodel.MainViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -27,7 +27,7 @@ class SplashActivity : BaseActivity<MainViewModel, ActivitySplashBinding>(
         lifecycleScope.launch(Dispatchers.IO) {
             delay(2000)
             withContext(Dispatchers.Main) {
-                ScreenRouter.goToActivityClearStack(this@SplashActivity, MainActivity::class.java)
+                goToActivityClearStack(MainActivity::class.java)
             }
         }
     }

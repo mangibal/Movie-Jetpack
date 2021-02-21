@@ -1,4 +1,4 @@
-package com.iqbalfauzi.moviejetpack.presentation.home.viewmodel
+package com.iqbalfauzi.moviejetpack.presentation.main.viewmodel
 
 import androidx.lifecycle.ViewModel
 
