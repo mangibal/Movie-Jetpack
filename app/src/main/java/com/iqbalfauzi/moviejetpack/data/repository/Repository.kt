@@ -21,6 +21,12 @@ class Repository(private val remoteRepository: RemoteRepository) {
         flow {
             var movies: List<MovieEntity>
             val response = remoteRepository.getNowPlayingMovie(page)
+
+            /**
+             * emit from local storage first
+             * fetch from local here
+             * */
+
             // On Success Callback
             response.suspendOnSuccess {
                 if (data != null) {

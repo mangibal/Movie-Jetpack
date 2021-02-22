@@ -1,4 +1,4 @@
-package com.iqbalfauzi.moviejetpack.external
+package com.iqbalfauzi.moviejetpack.external.extensions
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData

@@ -1,4 +1,4 @@
-package com.iqbalfauzi.moviejetpack.external
+package com.iqbalfauzi.moviejetpack.external.extensions
 
 import android.app.ActivityManager
 import android.content.Context

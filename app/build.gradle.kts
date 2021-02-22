@@ -3,7 +3,6 @@ plugins {
     kotlin("android")
     id("kotlin-parcelize")
     id("kotlin-kapt")
-    id("kotlin-android")
 }
 
 android {
@@ -23,11 +22,11 @@ android {
         buildConfigField("String", "BASE_URL", "\"${Properties.BASE_URL}\"")
         buildConfigField("String", "BASE_IMAGE_URL", "\"${Properties.BASE_IMAGE_URL}\"")
 
-//        javaCompileOptions {
-//            annotationProcessorOptions {
-//                arguments = mapOf()
-//            }
-//        }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments["room.incremental"] = "true"
+            }
+        }
     }
 
     buildTypes {
@@ -82,10 +81,12 @@ dependencies {
     implementation("androidx.appcompat:appcompat:${Versions.appcompat}")
     implementation("com.google.android.material:material:${Versions.materialDesign}")
     implementation("androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}")
-    implementation("io.coil-kt:coil:${Versions.coil}") // Image Loader
+    implementation("androidx.recyclerview:recyclerview:1.1.0")
     implementation("androidx.viewpager2:viewpager2:${Versions.viewPager2}")
+    implementation("io.coil-kt:coil:${Versions.coil}") // Image Loader
     implementation("de.hdodenhof:circleimageview:${Versions.circleImageView}")
     implementation("com.facebook.shimmer:shimmer:0.5.0")
+    implementation("com.github.rbro112:Android-Indefinite-Pager-Indicator:1.4")
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:${Versions.viewModel}")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.viewModel}")
@@ -118,7 +119,6 @@ dependencies {
     implementation("org.koin:koin-androidx-scope:${Versions.koin}")
     implementation("org.koin:koin-androidx-viewmodel:${Versions.koin}")
     implementation("org.koin:koin-androidx-ext:${Versions.koin}")
-
     // TDD
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.mockito:mockito-core:$${Versions.mockito}")

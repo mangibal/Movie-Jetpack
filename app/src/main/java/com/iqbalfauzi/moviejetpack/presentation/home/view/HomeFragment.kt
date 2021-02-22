@@ -1,20 +1,45 @@
 package com.iqbalfauzi.moviejetpack.presentation.home.view
 
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import com.iqbalfauzi.moviejetpack.data.model.movie.MovieEntity
 import com.iqbalfauzi.moviejetpack.databinding.FragmentHomeBinding
 import com.iqbalfauzi.moviejetpack.domain.base.fragment.BaseFragment
-import com.iqbalfauzi.moviejetpack.external.observe
-import com.iqbalfauzi.moviejetpack.external.show
-import com.iqbalfauzi.moviejetpack.external.toast
+import com.iqbalfauzi.moviejetpack.external.extensions.observe
+import com.iqbalfauzi.moviejetpack.external.extensions.show
+import com.iqbalfauzi.moviejetpack.external.extensions.toast
+import com.iqbalfauzi.moviejetpack.presentation.home.adapter.NowPlayingAdapter
+import com.iqbalfauzi.moviejetpack.presentation.home.listener.OnMovieClickListener
 import com.iqbalfauzi.moviejetpack.presentation.home.viewmodel.HomeViewModel
-import timber.log.Timber
 
 
-class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(HomeViewModel::class, FragmentHomeBinding::inflate) {
+class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(
+    HomeViewModel::class,
+    FragmentHomeBinding::inflate
+), OnMovieClickListener {
+
+    private val nowPlayingAdapter: NowPlayingAdapter by lazy {
+        return@lazy NowPlayingAdapter(this)
+    }
 
     override fun onInitUI(savedInstanceState: Bundle?) {
         setupData()
+        setupBanner()
+    }
+
+    private fun setupBanner() {
+        with(binding) {
+            val snapHelper = PagerSnapHelper()
+            rvNowPlaying.apply {
+                layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                adapter = nowPlayingAdapter
+                setHasFixedSize(true)
+                snapHelper.attachToRecyclerView(this)
+                rvIndicator.attachToRecyclerView(this)
+            }
+        }
     }
 
     private fun setupData() {
@@ -30,7 +55,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(HomeViewMo
     }
 
     private fun onNowPlayingReceived(movies: List<MovieEntity>) {
-        Timber.i(movies.toString())
+        nowPlayingAdapter.setData(movies)
     }
 
     private fun onNowPlayingLoading(isLoading: Boolean) {
@@ -39,6 +64,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(HomeViewMo
 
     private fun onErrorMessageReceived(message: String) {
         requireActivity().toast(message)
+    }
+
+    override fun onMovieClickListener(movie: MovieEntity) {
+
     }
 
 }

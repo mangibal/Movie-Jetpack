@@ -1,14 +1,24 @@
 package com.iqbalfauzi.moviejetpack.presentation.main.view
 
+import android.app.Activity
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
+import androidx.core.view.ViewCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.iqbalfauzi.moviejetpack.R
 import com.iqbalfauzi.moviejetpack.databinding.ActivityMainBinding
 import com.iqbalfauzi.moviejetpack.domain.base.view.BaseActivity
-import com.iqbalfauzi.moviejetpack.external.isLowRamDevice
-import com.iqbalfauzi.moviejetpack.external.toast
+import com.iqbalfauzi.moviejetpack.external.extensions.isLowRamDevice
+import com.iqbalfauzi.moviejetpack.external.extensions.makeStatusBarTransparent
+import com.iqbalfauzi.moviejetpack.external.extensions.toast
 import com.iqbalfauzi.moviejetpack.presentation.main.adapter.MainNavigationAdapter
 import com.iqbalfauzi.moviejetpack.presentation.main.viewmodel.MainViewModel
 import kotlinx.coroutines.Dispatchers
@@ -45,6 +55,10 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(
 
     override fun onInitUI(savedInstanceState: Bundle?) {
         setupBottomNavigation()
+        makeStatusBarTransparent()
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
+            insets.consumeSystemWindowInsets()
+        }
     }
 
     private fun setupBottomNavigation() {
