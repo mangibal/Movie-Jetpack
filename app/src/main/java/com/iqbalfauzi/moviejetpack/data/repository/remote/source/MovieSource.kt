@@ -9,4 +9,5 @@ import com.skydoves.sandwich.ApiResponse
  */
 interface MovieSource {
     suspend fun getNowPlayingMovie(requestPage: Int = 1): ApiResponse<MovieResponse>
+    suspend fun getUpcomingMovie(requestPage: Int = 1): ApiResponse<MovieResponse>
 }

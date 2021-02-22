@@ -14,4 +14,7 @@ class RemoteRepository(private val apiService: ApiService) : MovieSource {
     override suspend fun getNowPlayingMovie(requestPage: Int): ApiResponse<MovieResponse> =
         apiService.getNowPlayingMovie(requestPage)
 
+    override suspend fun getUpcomingMovie(requestPage: Int): ApiResponse<MovieResponse> =
+        apiService.getUpcomingMovie(requestPage)
+
 }

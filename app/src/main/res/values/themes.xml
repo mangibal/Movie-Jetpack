@@ -45,17 +45,25 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="DotsIndicatorStyle" >
+    <style name="TextViewSectionTitle" parent="TextViewBaseStyle">
+        <item name="android:fontFamily">@font/comfortaa_bold</item>
+        <item name="android:padding">@dimen/dimen12</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/font18</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="DotsIndicatorStyle">
         <item name="dotColor">@android:color/darker_gray</item>
         <item name="selectedDotColor">@color/white</item>
         <item name="selectedDotRadius">@dimen/dimen6</item>
     </style>
 
-<!--    <style name="DotsIndicator" parent="ScrollingPagerIndicator">-->
-<!--        <item name="spi_dotSize">@dimen/dimen8</item>-->
-<!--        <item name="spi_dotSelectedSize">@dimen/dimen12</item>-->
-<!--        <item name="spi_dotColor">@android:color/darker_gray</item>-->
-<!--        <item name="spi_dotSelectedColor">@color/white</item>-->
-<!--    </style>-->
+    <!--    <style name="DotsIndicator" parent="ScrollingPagerIndicator">-->
+    <!--        <item name="spi_dotSize">@dimen/dimen8</item>-->
+    <!--        <item name="spi_dotSelectedSize">@dimen/dimen12</item>-->
+    <!--        <item name="spi_dotColor">@android:color/darker_gray</item>-->
+    <!--        <item name="spi_dotSelectedColor">@color/white</item>-->
+    <!--    </style>-->
 
 </resources>

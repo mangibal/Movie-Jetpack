@@ -47,4 +47,32 @@ class Repository(private val remoteRepository: RemoteRepository) {
                 }
         }.flowOn(Dispatchers.IO).collect()
 
+    suspend fun getUpcomingMovie(page: Int = 1, dataCallback: DataCallback<List<MovieEntity>>) =
+        flow {
+            var movies: List<MovieEntity>
+            val response = remoteRepository.getUpcomingMovie(page)
+            /**
+             * emit from local storage first
+             * */
+
+            // On Success Callback
+            response.suspendOnSuccess {
+                if (data != null) {
+                    movies = data?.results ?: emptyList()
+                    emit(movies)
+                    dataCallback.onSuccess(movies)
+                }
+            }
+                // handle the case when the API request gets an error response.
+                // e.g. internal server error.
+                .onError {
+                    dataCallback.onError(message())
+                }
+                // handle the case when the API request gets an exception response.
+                // e.g. network connection error.
+                .onException {
+                    dataCallback.onException(message())
+                }
+        }.flowOn(Dispatchers.IO).collect()
+
 }

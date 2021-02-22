@@ -20,7 +20,10 @@ class HomeViewModel : BaseViewModel() {
     private val _nowPlayingMovies: MutableLiveData<List<MovieEntity>> = MutableLiveData()
     val nowPlayingMovies: LiveData<List<MovieEntity>> = _nowPlayingMovies
 
-    fun getNowPlayingMovie(page: Int = 1) {
+    private val _upcomingMovies: MutableLiveData<List<MovieEntity>> = MutableLiveData()
+    val upcomingMovies: LiveData<List<MovieEntity>> = _upcomingMovies
+
+    fun getNowPlayingMovies(page: Int = 1) {
         _onProgressNowPlaying.postValue(true)
         viewModelScope.launch {
             repository.getNowPlayingMovie(page, object : DataCallback<List<MovieEntity>> {
@@ -36,6 +39,25 @@ class HomeViewModel : BaseViewModel() {
 
                 override fun onException(message: String) {
                     _onProgressNowPlaying.postValue(false)
+                    _errorMessage.postValue(message)
+                }
+
+            })
+        }
+    }
+
+    fun getUpcomingMovies(page: Int = 1) {
+        viewModelScope.launch {
+            repository.getUpcomingMovie(page, object : DataCallback<List<MovieEntity>> {
+                override fun onSuccess(data: List<MovieEntity>) {
+                    _upcomingMovies.postValue(data)
+                }
+
+                override fun onError(message: String) {
+                    _errorMessage.postValue(message)
+                }
+
+                override fun onException(message: String) {
                     _errorMessage.postValue(message)
                 }
 
