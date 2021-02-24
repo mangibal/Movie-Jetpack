@@ -1,23 +1,22 @@
 package com.iqbalfauzi.moviejetpack.presentation.home.view
 
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.iqbalfauzi.moviejetpack.data.model.movie.MovieEntity
 import com.iqbalfauzi.moviejetpack.data.model.tv.TvShowEntity
 import com.iqbalfauzi.moviejetpack.databinding.FragmentHomeBinding
 import com.iqbalfauzi.moviejetpack.domain.base.fragment.BaseFragment
+import com.iqbalfauzi.moviejetpack.external.extensions.initRecyclerViewList
 import com.iqbalfauzi.moviejetpack.external.extensions.observe
 import com.iqbalfauzi.moviejetpack.external.extensions.show
 import com.iqbalfauzi.moviejetpack.external.extensions.toast
 import com.iqbalfauzi.moviejetpack.presentation.home.adapter.movie.NowPlayingAdapter
+import com.iqbalfauzi.moviejetpack.presentation.home.adapter.movie.UpcomingAdapter
 import com.iqbalfauzi.moviejetpack.presentation.home.adapter.tv.OnTheAirTvAdapter
 import com.iqbalfauzi.moviejetpack.presentation.home.adapter.tv.PopularTvAdapter
-import com.iqbalfauzi.moviejetpack.presentation.home.adapter.movie.UpcomingAdapter
 import com.iqbalfauzi.moviejetpack.presentation.home.listener.OnMovieClickListener
 import com.iqbalfauzi.moviejetpack.presentation.home.listener.OnTvClickListener
 import com.iqbalfauzi.moviejetpack.presentation.home.viewmodel.HomeViewModel
-
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(
     HomeViewModel::class,
@@ -43,31 +42,28 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(
     override fun onInitUI(savedInstanceState: Bundle?) {
         setupData()
         setupBanner()
-        setupUpcomingMovies()
-        setupPopularTvShow()
-        setupOnTheAirTvShow()
+        setupItemList()
     }
 
-    private fun setupOnTheAirTvShow() {
-        binding.rvOnTheAir.adapter = onTheAirTvAdapter
-    }
-
-    private fun setupPopularTvShow() {
-        binding.rvPopular.adapter = popularTvAdapter
-    }
-
-    private fun setupUpcomingMovies() {
-        binding.rvUpcoming.adapter = upcomingAdapter
+    private fun setupItemList() {
+        with(binding) {
+            with(requireActivity()) {
+                initRecyclerViewList(rvUpcoming, false)
+                initRecyclerViewList(rvOnTheAir, false)
+                initRecyclerViewList(rvPopular, false)
+            }
+            rvUpcoming.adapter = upcomingAdapter
+            rvOnTheAir.adapter = onTheAirTvAdapter
+            rvPopular.adapter = popularTvAdapter
+        }
     }
 
     private fun setupBanner() {
         with(binding) {
             val snapHelper = PagerSnapHelper()
             rvNowPlaying.apply {
-                layoutManager =
-                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                requireActivity().initRecyclerViewList(this, false)
                 adapter = nowPlayingAdapter
-                setHasFixedSize(true)
                 snapHelper.attachToRecyclerView(this)
                 rvIndicator.attachToRecyclerView(this)
             }
@@ -84,6 +80,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(
             observe(errorMessage, ::onErrorMessageReceived)
             // loading state
             observe(onProgressNowPlaying, ::onNowPlayingLoading)
+            observe(onProgressUpcoming, ::onUpcomingLoading)
+            observe(onProgressOnTheAir, ::onOnTheAirLoading)
+            observe(onProgressPopular, ::onPopularLoading)
+
             // observe now playing movie data
             observe(nowPlayingMovies, ::onNowPlayingReceived)
             // observe upcoming movies data
@@ -92,6 +92,51 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(
             observe(onTheAirTvList, ::onOnTheAirTvReceived)
             // observe popular tv show data
             observe(popularTvShow, ::onPopularTvShowReceived)
+        }
+    }
+
+    private fun onUpcomingLoading(isLoading: Boolean) {
+        with(binding) {
+            shimmerUpcoming.shimmerHome.apply {
+                show(isLoading)
+                if (isLoading) {
+                    startShimmer()
+                } else {
+                    stopShimmer()
+                }
+            }
+            tvUpcomingTitle.show(!isLoading)
+            rvUpcoming.show(!isLoading)
+        }
+    }
+
+    private fun onOnTheAirLoading(isLoading: Boolean) {
+        with(binding) {
+            shimmerOnTheAir.shimmerHome.apply {
+                show(isLoading)
+                if (isLoading) {
+                    startShimmer()
+                } else {
+                    stopShimmer()
+                }
+            }
+            tvOnTheAir.show(!isLoading)
+            rvOnTheAir.show(!isLoading)
+        }
+    }
+
+    private fun onPopularLoading(isLoading: Boolean) {
+        with(binding) {
+            shimmerPopular.shimmerHome.apply {
+                show(isLoading)
+                if (isLoading) {
+                    startShimmer()
+                } else {
+                    stopShimmer()
+                }
+            }
+            tvPopular.show(!isLoading)
+            rvPopular.show(!isLoading)
         }
     }
 

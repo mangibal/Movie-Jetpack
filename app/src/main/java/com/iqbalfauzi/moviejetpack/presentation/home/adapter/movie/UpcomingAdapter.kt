@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.iqbalfauzi.moviejetpack.BuildConfig
 import com.iqbalfauzi.moviejetpack.data.model.movie.MovieEntity
 import com.iqbalfauzi.moviejetpack.databinding.ItemMovieBinding
+import com.iqbalfauzi.moviejetpack.domain.base.holder.BaseHolder
 import com.iqbalfauzi.moviejetpack.external.extensions.coil
 import com.iqbalfauzi.moviejetpack.presentation.home.listener.OnMovieClickListener
 
@@ -19,14 +20,14 @@ class UpcomingAdapter(private val listener: OnMovieClickListener) :
     private var list: List<MovieEntity> = emptyList()
 
     inner class UpcomingHolder(private val binding: ItemMovieBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: MovieEntity) {
+        BaseHolder<MovieEntity>(binding) {
+        override fun setContent(data: MovieEntity) {
             with(binding) {
-                val imageUrl = "${BuildConfig.BASE_IMAGE_URL}${item.posterPath}"
+                val imageUrl = "${BuildConfig.BASE_IMAGE_URL}${data.posterPath}"
                 ivPoster.coil(imageUrl)
-                tvItemTitle.text = item.title
-                tvItemDate.text = item.releaseDate
-                root.setOnClickListener { listener.onMovieClickListener(item) }
+                tvItemTitle.text = data.title
+                tvItemDate.text = data.releaseDate
+                root.setOnClickListener { listener.onMovieClickListener(data) }
             }
         }
     }
@@ -38,7 +39,7 @@ class UpcomingAdapter(private val listener: OnMovieClickListener) :
     }
 
     override fun onBindViewHolder(holder: UpcomingHolder, position: Int) =
-        holder.bind(list[position])
+        holder.setContent(list[position])
 
     override fun getItemCount(): Int = list.size
 

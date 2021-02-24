@@ -18,6 +18,15 @@ class HomeViewModel : BaseViewModel() {
     private val _onProgressNowPlaying: MutableLiveData<Boolean> = MutableLiveData()
     val onProgressNowPlaying: LiveData<Boolean> = _onProgressNowPlaying
 
+    private val _onProgressUpcoming = MutableLiveData<Boolean>()
+    val onProgressUpcoming: LiveData<Boolean> = _onProgressUpcoming
+
+    private val _onProgressOnTheAir = MutableLiveData<Boolean>()
+    val onProgressOnTheAir: LiveData<Boolean> = _onProgressOnTheAir
+
+    private val _onProgressPopular = MutableLiveData<Boolean>()
+    val onProgressPopular: LiveData<Boolean> = _onProgressPopular
+
     private val _nowPlayingMovies: MutableLiveData<List<MovieEntity>> = MutableLiveData()
     val nowPlayingMovies: LiveData<List<MovieEntity>> = _nowPlayingMovies
 
@@ -54,17 +63,21 @@ class HomeViewModel : BaseViewModel() {
     }
 
     fun getUpcomingMovies(page: Int = 1) {
+        _onProgressUpcoming.postValue(true)
         viewModelScope.launch {
             repository.getUpcomingMovie(page, object : DataCallback<List<MovieEntity>> {
                 override fun onSuccess(data: List<MovieEntity>) {
                     _upcomingMovies.postValue(data)
+                    _onProgressUpcoming.postValue(false)
                 }
 
                 override fun onError(message: String) {
+                    _onProgressUpcoming.postValue(false)
                     _errorMessage.postValue(message)
                 }
 
                 override fun onException(message: String) {
+                    _onProgressUpcoming.postValue(false)
                     _errorMessage.postValue(message)
                 }
 
@@ -73,17 +86,21 @@ class HomeViewModel : BaseViewModel() {
     }
 
     fun getOnTheAirTv(page: Int = 1) {
+        _onProgressOnTheAir.postValue(true)
         viewModelScope.launch {
             repository.getOnTheAirTv(page, object : DataCallback<List<TvShowEntity>> {
                 override fun onSuccess(data: List<TvShowEntity>) {
                     _onTheAirTvList.postValue(data)
+                    _onProgressOnTheAir.postValue(false)
                 }
 
                 override fun onError(message: String) {
+                    _onProgressOnTheAir.postValue(false)
                     _errorMessage.postValue(message)
                 }
 
                 override fun onException(message: String) {
+                    _onProgressOnTheAir.postValue(false)
                     _errorMessage.postValue(message)
                 }
 
@@ -92,18 +109,22 @@ class HomeViewModel : BaseViewModel() {
     }
 
     fun getPopularTvShow(page: Int = 1) {
+        _onProgressPopular.postValue(true)
         viewModelScope.launch {
             repository.getPopularTvShow(page, object : DataCallback<List<TvShowEntity>> {
                 override fun onSuccess(data: List<TvShowEntity>) {
                     _popularTvShow.postValue(data)
+                    _onProgressPopular.postValue(false)
                 }
 
                 override fun onError(message: String) {
                     _errorMessage.postValue(message)
+                    _onProgressPopular.postValue(false)
                 }
 
                 override fun onException(message: String) {
                     _errorMessage.postValue(message)
+                    _onProgressPopular.postValue(false)
                 }
 
             })

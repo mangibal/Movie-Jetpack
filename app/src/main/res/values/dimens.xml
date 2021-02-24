@@ -8,11 +8,12 @@
     <dimen name="dimen12">12dp</dimen>
     <dimen name="dimen16">16dp</dimen>
     <dimen name="dimen24">24dp</dimen>
+    <dimen name="dimen32">32dp</dimen>
     <dimen name="dimen54">54dp</dimen>
 
     <!-- Font Size -->
     <dimen name="font12">12sp</dimen>
     <dimen name="font14">14sp</dimen>
-    <dimen name="font36">36sp</dimen>
     <dimen name="font18">18sp</dimen>
+    <dimen name="font36">36sp</dimen>
 </resources>

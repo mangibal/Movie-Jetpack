@@ -2,7 +2,9 @@ package com.iqbalfauzi.moviejetpack.presentation.splash
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.iqbalfauzi.moviejetpack.R
 import com.iqbalfauzi.moviejetpack.databinding.ActivitySplashBinding
 import com.iqbalfauzi.moviejetpack.domain.base.view.BaseActivity
 import com.iqbalfauzi.moviejetpack.domain.router.goToActivityClearStack
@@ -17,12 +19,11 @@ import kotlinx.coroutines.withContext
  * Created by Iqbal Fauzi on 20/02/2021
  * iqbal.fauzi.if99@gmail.com
  */
-class SplashActivity : BaseActivity<MainViewModel, ActivitySplashBinding>(
-    MainViewModel::class,
-    ActivitySplashBinding::inflate
-) {
+class SplashActivity : AppCompatActivity() {
 
-    override fun onInitUI(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_splash)
         hideSystemUI()
         lifecycleScope.launch(Dispatchers.IO) {
             delay(2000)

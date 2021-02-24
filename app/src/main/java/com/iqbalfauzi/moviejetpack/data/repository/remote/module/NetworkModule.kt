@@ -1,7 +1,6 @@
 package com.iqbalfauzi.moviejetpack.data.repository.remote.module
 
 import com.iqbalfauzi.moviejetpack.BuildConfig
-import com.iqbalfauzi.moviejetpack.data.repository.remote.RemoteRepository
 import com.iqbalfauzi.moviejetpack.data.repository.remote.network.ApiService
 import com.skydoves.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
 import com.squareup.moshi.Moshi
@@ -18,6 +17,7 @@ import java.util.concurrent.TimeUnit
  * Created by Iqbal Fauzi on 2/21/21 1:34 PM
  * iqbal.fauzi.if99@gmail.com
  */
+private const val API_HEADER_KEY = "api_key"
 val networkModule = module {
     single {
         val loggingInterceptor = HttpLoggingInterceptor().apply {
@@ -33,7 +33,7 @@ val networkModule = module {
             val originalHttpUrl = original.url
 
             val url = originalHttpUrl.newBuilder()
-                .addQueryParameter("api_key", BuildConfig.API_KEY)
+                .addQueryParameter(API_HEADER_KEY, BuildConfig.API_KEY)
                 .build()
 
             val requestBuilder = original.newBuilder()

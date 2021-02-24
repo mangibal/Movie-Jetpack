@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.iqbalfauzi.moviejetpack.BuildConfig
 import com.iqbalfauzi.moviejetpack.data.model.movie.MovieEntity
 import com.iqbalfauzi.moviejetpack.databinding.ItemBannerBinding
+import com.iqbalfauzi.moviejetpack.domain.base.holder.BaseHolder
 import com.iqbalfauzi.moviejetpack.external.extensions.coil
 import com.iqbalfauzi.moviejetpack.presentation.home.listener.OnMovieClickListener
 
@@ -19,13 +20,13 @@ class NowPlayingAdapter(private val listener: OnMovieClickListener) :
     private var list: List<MovieEntity> = emptyList()
 
     inner class NowPlayingHolder(private val binding: ItemBannerBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: MovieEntity) {
+        BaseHolder<MovieEntity>(binding) {
+        override fun setContent(data: MovieEntity) {
             with(binding) {
-                val imageUrl = "${BuildConfig.BASE_IMAGE_URL}${item.posterPath}"
+                val imageUrl = "${BuildConfig.BASE_IMAGE_URL}${data.posterPath}"
                 ivBanner.coil(imageUrl)
-                tvTitle.text = item.title
-                root.setOnClickListener { listener.onMovieClickListener(item) }
+                tvTitle.text = data.title
+                root.setOnClickListener { listener.onMovieClickListener(data) }
             }
         }
     }
@@ -37,7 +38,7 @@ class NowPlayingAdapter(private val listener: OnMovieClickListener) :
     }
 
     override fun onBindViewHolder(holder: NowPlayingHolder, position: Int) =
-        holder.bind(list[position])
+        holder.setContent(list[position])
 
     override fun getItemCount(): Int = list.size
 

@@ -9,11 +9,37 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 /**
  * Created by Iqbal Fauzi on 21/02/21 11.54
  * iqbal.fauzi.if99@gmail.com
  */
+fun Activity.initRecyclerViewList(rv: RecyclerView, isVertical: Boolean = true) {
+    val rvLayoutManager = if (isVertical) {
+        LinearLayoutManager(
+            this@initRecyclerViewList,
+            LinearLayoutManager.VERTICAL,
+            false
+        )
+    } else {
+        LinearLayoutManager(
+            this@initRecyclerViewList,
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
+    }
+
+    rv.apply {
+        setHasFixedSize(true)
+        layoutManager = rvLayoutManager
+        itemAnimator = DefaultItemAnimator()
+    }
+}
+
 @Suppress("DEPRECATION")
 fun Activity.makeStatusBarTransparent() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
