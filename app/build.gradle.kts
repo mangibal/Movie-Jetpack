@@ -119,6 +119,8 @@ dependencies {
     implementation("org.koin:koin-androidx-scope:${Versions.koin}")
     implementation("org.koin:koin-androidx-viewmodel:${Versions.koin}")
     implementation("org.koin:koin-androidx-ext:${Versions.koin}")
+
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.6")
     // TDD
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.mockito:mockito-core:$${Versions.mockito}")

@@ -14,6 +14,6 @@ object MainScreen: KScreen<MainScreen>() {
     override val viewClass: Class<*>
         get() = MainActivity::class.java
 
-    val tvAppTitle = KTextView { withId(R.id.tv_sample)}
+    val tvAppTitle = KTextView { withId(R.id.tv_app_title)}
 
 }

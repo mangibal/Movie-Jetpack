@@ -1,6 +1,7 @@
 package com.iqbalfauzi.moviejetpack.data.repository.remote.network
 
 import com.iqbalfauzi.moviejetpack.data.model.movie.MovieResponse
+import com.iqbalfauzi.moviejetpack.data.model.tv.TvShowResponse
 import com.skydoves.sandwich.ApiResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -16,6 +17,12 @@ interface ApiService {
 
     @GET("movie/upcoming")
     suspend fun getUpcomingMovie(@Query("page") requestPage: Int): ApiResponse<MovieResponse>
+
+    @GET("tv/on_the_air")
+    suspend fun getOnTheAirTv(@Query("page") requestPage: Int): ApiResponse<TvShowResponse>
+
+    @GET("tv/popular")
+    suspend fun getPopularTvShow(@Query("page") requestPage: Int): ApiResponse<TvShowResponse>
 
 //    @GET("movie/{movie_id}")
 //    suspend fun getMovie(@Path("movie_id") movieId: Int): ApiResponse<Movie>

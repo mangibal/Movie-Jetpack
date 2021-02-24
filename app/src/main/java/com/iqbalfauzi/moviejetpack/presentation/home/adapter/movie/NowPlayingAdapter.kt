@@ -1,4 +1,4 @@
-package com.iqbalfauzi.moviejetpack.presentation.home.adapter
+package com.iqbalfauzi.moviejetpack.presentation.home.adapter.movie
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,13 +7,14 @@ import com.iqbalfauzi.moviejetpack.BuildConfig
 import com.iqbalfauzi.moviejetpack.data.model.movie.MovieEntity
 import com.iqbalfauzi.moviejetpack.databinding.ItemBannerBinding
 import com.iqbalfauzi.moviejetpack.external.extensions.coil
-import com.iqbalfauzi.moviejetpack.presentation.home.listener.OnNowPlayingClickListener
+import com.iqbalfauzi.moviejetpack.presentation.home.listener.OnMovieClickListener
 
 /**
  * Created by Iqbal Fauzi on 2/22/21 9:36 AM
  * iqbal.fauzi.if99@gmail.com
  */
-class NowPlayingAdapter(private val listener: OnNowPlayingClickListener): RecyclerView.Adapter<NowPlayingAdapter.NowPlayingHolder>() {
+class NowPlayingAdapter(private val listener: OnMovieClickListener) :
+    RecyclerView.Adapter<NowPlayingAdapter.NowPlayingHolder>() {
 
     private var list: List<MovieEntity> = emptyList()
 
@@ -24,7 +25,7 @@ class NowPlayingAdapter(private val listener: OnNowPlayingClickListener): Recycl
                 val imageUrl = "${BuildConfig.BASE_IMAGE_URL}${item.posterPath}"
                 ivBanner.coil(imageUrl)
                 tvTitle.text = item.title
-                root.setOnClickListener { listener.onNowPlayingClickListener(item) }
+                root.setOnClickListener { listener.onMovieClickListener(item) }
             }
         }
     }
@@ -35,7 +36,8 @@ class NowPlayingAdapter(private val listener: OnNowPlayingClickListener): Recycl
         return NowPlayingHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: NowPlayingHolder, position: Int) = holder.bind(list[position])
+    override fun onBindViewHolder(holder: NowPlayingHolder, position: Int) =
+        holder.bind(list[position])
 
     override fun getItemCount(): Int = list.size
 

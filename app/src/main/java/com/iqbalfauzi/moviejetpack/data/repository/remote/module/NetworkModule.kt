@@ -19,49 +19,50 @@ import java.util.concurrent.TimeUnit
  * iqbal.fauzi.if99@gmail.com
  */
 val networkModule = module {
-    single { provideRetrofit() }
-}
+    single {
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = if (BuildConfig.DEBUG) {
+                HttpLoggingInterceptor.Level.BODY
+            } else {
+                HttpLoggingInterceptor.Level.NONE
+            }
+        }
 
-private fun getInterceptor(): OkHttpClient {
-    val loggingInterceptor = HttpLoggingInterceptor()
-    loggingInterceptor.level = if (BuildConfig.DEBUG) {
-        HttpLoggingInterceptor.Level.BODY
-    } else {
-        HttpLoggingInterceptor.Level.NONE
-    }
+        val apiKeyInterceptor = Interceptor { chain ->
+            val original = chain.request()
+            val originalHttpUrl = original.url
 
-    val apiKeyInterceptor = Interceptor { chain ->
-        val original = chain.request()
-        val originalHttpUrl = original.url
+            val url = originalHttpUrl.newBuilder()
+                .addQueryParameter("api_key", BuildConfig.API_KEY)
+                .build()
 
-        val url = originalHttpUrl.newBuilder()
-            .addQueryParameter("api_key", BuildConfig.API_KEY)
+            val requestBuilder = original.newBuilder()
+                .url(url)
+
+            val request = requestBuilder.build()
+            chain.proceed(request)
+        }
+
+        OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .addInterceptor(apiKeyInterceptor)
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .retryOnConnectionFailure(true)
             .build()
-
-        val requestBuilder = original.newBuilder()
-            .url(url)
-
-        val request = requestBuilder.build()
-        chain.proceed(request)
     }
 
-    return OkHttpClient.Builder()
-        .addInterceptor(loggingInterceptor)
-        .addInterceptor(apiKeyInterceptor)
-        .connectTimeout(30, TimeUnit.SECONDS)
-        .writeTimeout(30, TimeUnit.SECONDS)
-        .retryOnConnectionFailure(true)
-        .build()
+    single {
+        Retrofit.Builder()
+            .baseUrl(BuildConfig.BASE_URL)
+            .client(get())
+            .addConverterFactory(
+                MoshiConverterFactory.create(
+                    Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+                )
+            )
+            .addCallAdapterFactory(CoroutinesResponseCallAdapterFactory())
+            .build()
+            .create(ApiService::class.java)
+    }
 }
-
-private fun provideRetrofit(): ApiService = Retrofit.Builder()
-    .baseUrl(BuildConfig.BASE_URL)
-    .client(getInterceptor())
-    .addConverterFactory(
-        MoshiConverterFactory.create(
-            Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
-        )
-    )
-    .addCallAdapterFactory(CoroutinesResponseCallAdapterFactory())
-    .build()
-    .create(ApiService::class.java)
