@@ -5,6 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 
 /**
  * Created by Iqbal Fauzi on 2/21/21 2:20 PM
@@ -31,3 +34,5 @@ fun <T, K, R> LiveData<T>.combineWith(
     }
     return result
 }
+
+fun <T> Flow<T>.flowOnBack() = flowOn(Dispatchers.IO)

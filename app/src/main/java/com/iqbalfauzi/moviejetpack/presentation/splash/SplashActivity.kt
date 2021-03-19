@@ -5,20 +5,19 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.iqbalfauzi.moviejetpack.R
-import com.iqbalfauzi.moviejetpack.databinding.ActivitySplashBinding
-import com.iqbalfauzi.moviejetpack.domain.base.view.BaseActivity
 import com.iqbalfauzi.moviejetpack.domain.router.goToActivityClearStack
 import com.iqbalfauzi.moviejetpack.presentation.main.view.MainActivity
-import com.iqbalfauzi.moviejetpack.presentation.main.viewmodel.MainViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.koin.core.component.KoinApiExtension
 
 /**
  * Created by Iqbal Fauzi on 20/02/2021
  * iqbal.fauzi.if99@gmail.com
  */
+@KoinApiExtension
 class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

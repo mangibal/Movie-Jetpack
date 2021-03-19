@@ -1,4 +1,4 @@
-package com.iqbalfauzi.moviejetpack.data.repository
+package com.iqbalfauzi.moviejetpack.data.source
 
 /**
  * Created by Iqbal Fauzi on 2/21/21 2:00 PM
@@ -6,6 +6,5 @@ package com.iqbalfauzi.moviejetpack.data.repository
  */
 interface DataCallback<T> {
     fun onSuccess(data: T)
-    fun onError(message: String)
-    fun onException(message: String)
+    fun onError(throwable: Throwable)
 }

@@ -17,7 +17,9 @@ import com.iqbalfauzi.moviejetpack.presentation.home.adapter.tv.PopularTvAdapter
 import com.iqbalfauzi.moviejetpack.presentation.home.listener.OnMovieClickListener
 import com.iqbalfauzi.moviejetpack.presentation.home.listener.OnTvClickListener
 import com.iqbalfauzi.moviejetpack.presentation.home.viewmodel.HomeViewModel
+import org.koin.core.component.KoinApiExtension
 
+@KoinApiExtension
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(
     HomeViewModel::class,
     FragmentHomeBinding::inflate
@@ -72,7 +74,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(
 
     private fun setupData() {
         with(viewModel) {
-            getNowPlayingMovies()
+            getNowPlayingMovie()
             getUpcomingMovies()
             getOnTheAirTv()
             getPopularTvShow()
@@ -92,8 +94,11 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(
             observe(onTheAirTvList, ::onOnTheAirTvReceived)
             // observe popular tv show data
             observe(popularTvShow, ::onPopularTvShowReceived)
+
         }
     }
+
+
 
     private fun onUpcomingLoading(isLoading: Boolean) {
         with(binding) {

@@ -1,8 +1,11 @@
 package com.iqbalfauzi.moviejetpack.koin
 
-import com.iqbalfauzi.moviejetpack.data.repository.remote.module.networkModule
-import com.iqbalfauzi.moviejetpack.data.repository.repositoryModule
-import com.iqbalfauzi.moviejetpack.presentation.home.homeModule
+import com.iqbalfauzi.moviejetpack.data.source.local.module.databaseModule
+import com.iqbalfauzi.moviejetpack.data.source.remote.module.networkModule
+import com.iqbalfauzi.moviejetpack.domain.repository.module.repositoryModule
+import com.iqbalfauzi.moviejetpack.domain.repository.module.useCaseModule
+import com.iqbalfauzi.moviejetpack.external.logger.loggerModule
+import com.iqbalfauzi.moviejetpack.presentation.home.module.homeModule
 import com.iqbalfauzi.moviejetpack.presentation.main.module.mainModule
 import org.koin.core.module.Module
 
@@ -12,10 +15,16 @@ import org.koin.core.module.Module
  */
 val appComponent: List<Module> = listOf(
     /**
+     * App Level Module
+     * */
+    loggerModule,
+    /**
      * Data Module
      * */
+    databaseModule,
     networkModule,
     repositoryModule,
+    useCaseModule,
     /**
      * Presentation Module
      * */

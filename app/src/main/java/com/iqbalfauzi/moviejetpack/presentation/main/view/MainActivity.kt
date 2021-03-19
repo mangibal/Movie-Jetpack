@@ -17,11 +17,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.koin.core.component.KoinApiExtension
 
 /**
  * Created by Iqbal Fauzi on 20/02/2021
  * iqbal.fauzi.if99@gmail.com
  */
+@KoinApiExtension
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(
     MainViewModel::class,
     ActivityMainBinding::inflate

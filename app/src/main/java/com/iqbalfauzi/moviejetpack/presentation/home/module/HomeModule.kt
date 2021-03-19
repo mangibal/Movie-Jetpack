@@ -1,4 +1,4 @@
-package com.iqbalfauzi.moviejetpack.presentation.home
+package com.iqbalfauzi.moviejetpack.presentation.home.module
 
 import com.iqbalfauzi.moviejetpack.presentation.home.viewmodel.HomeViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -9,5 +9,5 @@ import org.koin.dsl.module
  * iqbal.fauzi.if99@gmail.com
  */
 val homeModule = module {
-    viewModel { HomeViewModel() }
+    viewModel { HomeViewModel(get(), get()) }
 }

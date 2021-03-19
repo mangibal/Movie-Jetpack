@@ -1,7 +1,7 @@
-package com.iqbalfauzi.moviejetpack.data.repository.remote.module
+package com.iqbalfauzi.moviejetpack.data.source.remote.module
 
 import com.iqbalfauzi.moviejetpack.BuildConfig
-import com.iqbalfauzi.moviejetpack.data.repository.remote.network.ApiService
+import com.iqbalfauzi.moviejetpack.data.source.remote.network.ApiService
 import com.skydoves.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

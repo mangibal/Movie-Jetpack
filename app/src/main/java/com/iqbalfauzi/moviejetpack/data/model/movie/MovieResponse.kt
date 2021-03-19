@@ -1,7 +1,7 @@
 package com.iqbalfauzi.moviejetpack.data.model.movie
 
 import android.os.Parcelable
-import com.iqbalfauzi.moviejetpack.data.BaseResponse
+import com.iqbalfauzi.moviejetpack.data.model.BaseResponse
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
