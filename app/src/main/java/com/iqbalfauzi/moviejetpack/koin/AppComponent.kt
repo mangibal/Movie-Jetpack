@@ -5,6 +5,7 @@ import com.iqbalfauzi.moviejetpack.data.source.remote.module.networkModule
 import com.iqbalfauzi.moviejetpack.domain.repository.module.repositoryModule
 import com.iqbalfauzi.moviejetpack.domain.repository.module.useCaseModule
 import com.iqbalfauzi.moviejetpack.external.logger.loggerModule
+import com.iqbalfauzi.moviejetpack.presentation.detail.detailModule
 import com.iqbalfauzi.moviejetpack.presentation.home.module.homeModule
 import com.iqbalfauzi.moviejetpack.presentation.main.module.mainModule
 import org.koin.core.module.Module
@@ -29,5 +30,6 @@ val appComponent: List<Module> = listOf(
      * Presentation Module
      * */
     mainModule,
-    homeModule
+    homeModule,
+    detailModule
 )

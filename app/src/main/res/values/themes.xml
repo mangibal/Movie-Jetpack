@@ -17,6 +17,8 @@
         <item name="android:textViewStyle">@style/TextViewBaseStyle</item>
     </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="ButtonBaseStyle" parent="Widget.AppCompat.Button">
         <item name="android:textColor">@color/black</item>
         <item name="android:textAllCaps">false</item>

@@ -10,11 +10,12 @@
 
     <ImageView
         android:id="@+id/iv_banner"
-        android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:contentDescription="@string/msg_image_movie_banner"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:scaleType="centerCrop"
+        android:contentDescription="@string/msg_image_movie_banner"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1,1.78"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

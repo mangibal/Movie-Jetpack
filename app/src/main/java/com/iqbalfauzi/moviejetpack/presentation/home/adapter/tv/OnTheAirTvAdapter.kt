@@ -7,7 +7,7 @@ import com.iqbalfauzi.moviejetpack.BuildConfig
 import com.iqbalfauzi.moviejetpack.data.model.tv.TvShowEntity
 import com.iqbalfauzi.moviejetpack.databinding.ItemMovieBinding
 import com.iqbalfauzi.moviejetpack.domain.base.holder.BaseHolder
-import com.iqbalfauzi.moviejetpack.external.extensions.coil
+import com.iqbalfauzi.moviejetpack.external.extensions.loadImage
 import com.iqbalfauzi.moviejetpack.presentation.home.listener.OnTvClickListener
 
 /**
@@ -23,7 +23,7 @@ class OnTheAirTvAdapter(private val listener: OnTvClickListener) :
         override fun setContent(data: TvShowEntity) {
             with(binding) {
                 val imageUrl = "${BuildConfig.BASE_IMAGE_URL}${data.posterPath}"
-                ivPoster.coil(imageUrl)
+                ivPoster.loadImage(imageUrl)
                 tvItemTitle.text = data.name
                 tvItemDate.text = data.firstAirDate
                 root.setOnClickListener { listener.onTvClickListener(data) }

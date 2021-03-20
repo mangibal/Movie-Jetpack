@@ -7,7 +7,8 @@ import com.iqbalfauzi.moviejetpack.BuildConfig
 import com.iqbalfauzi.moviejetpack.data.model.movie.MovieEntity
 import com.iqbalfauzi.moviejetpack.databinding.ItemBannerBinding
 import com.iqbalfauzi.moviejetpack.domain.base.holder.BaseHolder
-import com.iqbalfauzi.moviejetpack.external.extensions.coil
+import com.iqbalfauzi.moviejetpack.external.extensions.PlaceholderType
+import com.iqbalfauzi.moviejetpack.external.extensions.loadImage
 import com.iqbalfauzi.moviejetpack.presentation.home.listener.OnMovieClickListener
 
 /**
@@ -23,8 +24,8 @@ class NowPlayingAdapter(private val listener: OnMovieClickListener) :
         BaseHolder<MovieEntity>(binding) {
         override fun setContent(data: MovieEntity) {
             with(binding) {
-                val imageUrl = "${BuildConfig.BASE_IMAGE_URL}${data.posterPath}"
-                ivBanner.coil(imageUrl)
+                val imageUrl = "${BuildConfig.BASE_IMAGE_URL}${data.backdropPath}"
+                ivBanner.loadImage(imageUrl, PlaceholderType.LIGHT)
                 tvTitle.text = data.title
                 root.setOnClickListener { listener.onMovieClickListener(data) }
             }

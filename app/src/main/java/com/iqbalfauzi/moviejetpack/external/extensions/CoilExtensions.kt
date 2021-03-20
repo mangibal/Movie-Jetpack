@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.widget.ImageView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import coil.load
+import coil.size.Scale
 import coil.transform.RoundedCornersTransformation
 import com.iqbalfauzi.moviejetpack.R
 
@@ -21,7 +22,7 @@ enum class PlaceholderType {
 }
 
 // Coil Image Loader
-fun ImageView.coil(
+fun ImageView.loadImage(
     imageUrl: String?,
     placeholderType: PlaceholderType = PlaceholderType.DARK,
     placeholder: Int = 0,
@@ -39,7 +40,7 @@ fun ImageView.coil(
     }
 }
 
-fun ImageView.coil(
+fun ImageView.loadImage(
     imageBitmap: Bitmap?,
     placeholderType: PlaceholderType = PlaceholderType.DARK,
     placeholder: Int = 0
@@ -55,7 +56,7 @@ fun ImageView.coil(
     }
 }
 
-fun ImageView.coil(
+fun ImageView.loadImage(
     imageId: Int,
     placeholderType: PlaceholderType = PlaceholderType.DARK,
     placeholder: Int = 0
