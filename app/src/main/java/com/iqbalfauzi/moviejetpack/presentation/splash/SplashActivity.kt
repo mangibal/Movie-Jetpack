@@ -2,32 +2,32 @@ package com.iqbalfauzi.moviejetpack.presentation.splash
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.iqbalfauzi.moviejetpack.databinding.ActivitySplashBinding
-import com.iqbalfauzi.moviejetpack.domain.base.view.BaseActivity
-import com.iqbalfauzi.moviejetpack.domain.router.ScreenRouter
-import com.iqbalfauzi.moviejetpack.presentation.home.view.MainActivity
-import com.iqbalfauzi.moviejetpack.presentation.home.viewmodel.MainViewModel
+import com.iqbalfauzi.moviejetpack.R
+import com.iqbalfauzi.moviejetpack.domain.router.goToActivityClearStack
+import com.iqbalfauzi.moviejetpack.presentation.main.view.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.koin.core.component.KoinApiExtension
 
 /**
  * Created by Iqbal Fauzi on 20/02/2021
  * iqbal.fauzi.if99@gmail.com
  */
-class SplashActivity : BaseActivity<MainViewModel, ActivitySplashBinding>(
-    MainViewModel::class,
-    ActivitySplashBinding::inflate
-) {
+@KoinApiExtension
+class SplashActivity : AppCompatActivity() {
 
-    override fun onInitUI(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_splash)
         hideSystemUI()
         lifecycleScope.launch(Dispatchers.IO) {
             delay(2000)
             withContext(Dispatchers.Main) {
-                ScreenRouter.goToActivityClearStack(this@SplashActivity, MainActivity::class.java)
+                goToActivityClearStack(MainActivity::class.java)
             }
         }
     }

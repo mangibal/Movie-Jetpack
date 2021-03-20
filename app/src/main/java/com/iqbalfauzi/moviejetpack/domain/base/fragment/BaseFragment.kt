@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -19,12 +18,12 @@ import kotlin.reflect.KClass
 abstract class BaseFragment<out VM : ViewModel, VB : ViewBinding>(
     kClass: KClass<VM>,
     private val viewBinder: (LayoutInflater) -> ViewBinding
-) : Fragment() {
+) : androidx.fragment.app.Fragment() {
 
     @Suppress("UNCHECKED_CAST")
     protected val binding by lazy(LazyThreadSafetyMode.NONE) { viewBinder.invoke(layoutInflater) as VB }
-    protected val viewModel: VM by viewModel(kClass)
-    protected val sharedViewModel: VM by sharedViewModel(kClass)
+    protected val viewModel: VM by viewModel(clazz = kClass)
+    protected val sharedViewModel: VM by sharedViewModel(clazz = kClass)
     protected var dataReceived: Bundle? = null
 
     override fun onCreateView(

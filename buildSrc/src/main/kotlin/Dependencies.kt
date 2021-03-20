@@ -67,7 +67,7 @@ object Versions {
     const val viewModel = "2.2.0"
 
     /* Koin - Dependency Injection */
-    const val koin = "2.1.6"
+    const val koin = "2.2.0"
 
     /* test */
     const val junit = "4.13.1"

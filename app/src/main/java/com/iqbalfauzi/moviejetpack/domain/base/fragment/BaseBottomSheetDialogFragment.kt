@@ -22,8 +22,8 @@ abstract class BaseBottomSheetDialogFragment<out VM : ViewModel, VB : ViewBindin
 
     @Suppress("UNCHECKED_CAST")
     protected val binding by lazy(LazyThreadSafetyMode.NONE) { viewBinder.invoke(layoutInflater) as VB }
-    protected val viewModel: VM by viewModel(kClass)
-    protected val sharedViewModel: VM by sharedViewModel(kClass)
+    protected val viewModel: VM by viewModel(clazz = kClass)
+    protected val sharedViewModel: VM by sharedViewModel(clazz = kClass)
     protected var dataReceived: Bundle? = null
 
     override fun onCreateView(

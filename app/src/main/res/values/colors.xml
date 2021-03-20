@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="gray">#313333</color>
+    <color name="lightGray">#515252</color>
+    <color name="emperor">#4F4F4F</color>
+    <color name="lighterGray">#8B8C8C</color>
+    <color name="darkSky">#D7D7D7</color>
+    <color name="darkerSky">#CACACA</color>
+    <color name="sky">#E4E4E4</color>
+    <color name="lightSky">#F6F6F6</color>
 </resources>
