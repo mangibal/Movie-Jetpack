@@ -7,7 +7,7 @@ import com.iqbalfauzi.moviejetpack.BuildConfig
 import com.iqbalfauzi.moviejetpack.data.model.movie.MovieEntity
 import com.iqbalfauzi.moviejetpack.databinding.ItemMovieBinding
 import com.iqbalfauzi.moviejetpack.domain.base.holder.BaseHolder
-import com.iqbalfauzi.moviejetpack.external.extensions.coil
+import com.iqbalfauzi.moviejetpack.external.extensions.loadImage
 import com.iqbalfauzi.moviejetpack.presentation.home.listener.OnMovieClickListener
 
 /**
@@ -24,7 +24,7 @@ class UpcomingAdapter(private val listener: OnMovieClickListener) :
         override fun setContent(data: MovieEntity) {
             with(binding) {
                 val imageUrl = "${BuildConfig.BASE_IMAGE_URL}${data.posterPath}"
-                ivPoster.coil(imageUrl)
+                ivPoster.loadImage(imageUrl)
                 tvItemTitle.text = data.title
                 tvItemDate.text = data.releaseDate
                 root.setOnClickListener { listener.onMovieClickListener(data) }

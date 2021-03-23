@@ -18,6 +18,13 @@ import androidx.recyclerview.widget.RecyclerView
  * Created by Iqbal Fauzi on 21/02/21 11.54
  * iqbal.fauzi.if99@gmail.com
  */
+fun View.setDimensions(newWidth: Int = measuredWidth, newHeight: Int = measuredHeight) {
+    val viewLayoutParams = layoutParams
+    layoutParams = viewLayoutParams.apply {
+        width = newWidth; height = newHeight
+    }
+}
+
 fun Activity.initRecyclerViewList(rv: RecyclerView, isVertical: Boolean = true) {
     val rvLayoutManager = if (isVertical) {
         LinearLayoutManager(

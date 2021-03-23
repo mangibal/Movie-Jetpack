@@ -6,10 +6,12 @@ import com.iqbalfauzi.moviejetpack.data.model.movie.MovieEntity
 import com.iqbalfauzi.moviejetpack.data.model.tv.TvShowEntity
 import com.iqbalfauzi.moviejetpack.databinding.FragmentHomeBinding
 import com.iqbalfauzi.moviejetpack.domain.base.fragment.BaseFragment
+import com.iqbalfauzi.moviejetpack.domain.router.goToActivity
 import com.iqbalfauzi.moviejetpack.external.extensions.initRecyclerViewList
 import com.iqbalfauzi.moviejetpack.external.extensions.observe
 import com.iqbalfauzi.moviejetpack.external.extensions.show
 import com.iqbalfauzi.moviejetpack.external.extensions.toast
+import com.iqbalfauzi.moviejetpack.presentation.detail.DetailActivity
 import com.iqbalfauzi.moviejetpack.presentation.home.adapter.movie.NowPlayingAdapter
 import com.iqbalfauzi.moviejetpack.presentation.home.adapter.movie.UpcomingAdapter
 import com.iqbalfauzi.moviejetpack.presentation.home.adapter.tv.OnTheAirTvAdapter
@@ -99,7 +101,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(
     }
 
 
-
     private fun onUpcomingLoading(isLoading: Boolean) {
         with(binding) {
             shimmerUpcoming.shimmerHome.apply {
@@ -170,11 +171,17 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(
     }
 
     override fun onMovieClickListener(movie: MovieEntity) {
-        requireActivity().toast(movie.toString())
+        val bundle = Bundle().apply {
+            putParcelable("DATA", movie)
+        }
+        requireActivity().goToActivity(DetailActivity::class.java, bundle)
     }
 
     override fun onTvClickListener(tvEntity: TvShowEntity) {
-        requireActivity().toast(tvEntity.toString())
+        val bundle = Bundle().apply {
+            putParcelable("DATA", tvEntity)
+        }
+        requireActivity().goToActivity(DetailActivity::class.java, bundle)
     }
 
 
