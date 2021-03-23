@@ -1,8 +1,10 @@
 package com.iqbalfauzi.moviejetpack.domain.base.view
 
 import android.os.Bundle
+import android.transition.Explode
 import android.view.LayoutInflater
 import android.view.View
+import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding

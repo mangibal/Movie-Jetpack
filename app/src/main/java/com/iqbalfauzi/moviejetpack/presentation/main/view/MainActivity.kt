@@ -1,6 +1,8 @@
 package com.iqbalfauzi.moviejetpack.presentation.main.view
 
 import android.os.Bundle
+import android.transition.Explode
+import android.view.Window
 import androidx.core.view.ViewCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2

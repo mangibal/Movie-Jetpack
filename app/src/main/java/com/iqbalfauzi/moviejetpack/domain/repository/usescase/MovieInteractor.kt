@@ -16,13 +16,13 @@ class MovieInteractor(private val repository: IRepository) : MovieUseCase {
         requestPage: Int,
         dataCallback: DataCallback<List<MovieEntity>>
     ) {
-        repository.getNowPlayingMovie(requestPage).collect {
-            when (it) {
+        repository.getNowPlayingMovie(requestPage).collect { data ->
+            when (data) {
                 is DataState.Success -> {
-                    dataCallback.onSuccess(it.data ?: emptyList())
+                    dataCallback.onSuccess(data.data ?: emptyList())
                 }
                 is DataState.Error -> {
-                    dataCallback.onError(it.throwable ?: Throwable("Something went wrong"))
+                    dataCallback.onError(data.throwable ?: Throwable("Something went wrong"))
                 }
             }
         }

@@ -8,4 +8,5 @@
     <string name="title_upcoming_movie">Upcoming Movie</string>
     <string name="title_on_the_air_tv">On The Air TV</string>
     <string name="title_popular_tv_show">Popular TV Show</string>
+    <string name="label_overview">Overview</string>
 </resources>
